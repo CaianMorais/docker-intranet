@@ -1,0 +1,3 @@
+[submodule "app/intranet_fiero_v2"]
+	path = app/intranet_fiero_v2
+	url = https://github.com/CaianMorais/intranet_fiero_v2.git

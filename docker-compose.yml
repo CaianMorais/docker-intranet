@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: intranet-fiero
+    volumes:
+      - ./app/intranet_fiero_v2:/var/www/html/intranet_fiero_v2
+      - ./docker/apache/default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./docker/apache/ports.conf:/etc/apache2/ports.conf
+    ports:
+      - "8003:8003"
+    depends_on:
+      - mysql_intranet
+
+  mysql_intranet:
+    image: mysql:8.0
+    container_name: mysql_intranet
+    environment:
+      MYSQL_ROOT_PASSWORD: fn1d2f13r0
+      MYSQL_DATABASE: intranet_v2
+      MYSQL_USER: adinf
+      MYSQL_PASSWORD: fn1d2f13r0
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_intranet_data:/var/lib/mysql
+      
+volumes:
+  mysql_intranet_data:
